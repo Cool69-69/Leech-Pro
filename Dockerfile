@@ -31,6 +31,8 @@ RUN wget -O /app/gautam/gclone.gz https://git.io/JJMSG
 RUN gzip -d /app/gautam/gclone.gz
 RUN chmod 0775 /app/gautam/gclone
 
+RUN apt -qq -y autoremove
+
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 COPY . .
