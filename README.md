@@ -1,12 +1,6 @@
-![MAXX LEECH V2](https://telegra.ph/file/af8f0596124714a17e4e2.png)
-
-👉 [Orginal Repository](https://github.com/gautamajay52/TorrentLeech-Gdrive)
-
-![Maxx](https://telegra.ph/file/d18fa7fa33f26f733adb9.png)
-
-#<b>Don't Kill Heroku please ☹️</b>
-
-[![MAXX LEECH](https://telegra.ph/file/29d788a656dd517eafd0a.png)](https://telegram.dog/MaxxBots)
+## ***Heroku***
+### For Heroku users New repo will come soon (This repo will not work on heroku)
+<p><a href="https://heroku.com/deploy?template=https://github.com/Manssizz/Leech-Pro"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 
 
