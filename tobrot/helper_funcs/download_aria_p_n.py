@@ -363,10 +363,10 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 if is_file is None:
                     msgg = f"<b>• Connections : {file.connections} </b>"
                 else:
-                    msgg = f"<b>• Peers:</b> <code>{file.connections}</code> <b>• Seeds:</b> <code>{file.num_seeders}</code>\n<b>• GID :</b> <code>{gid}</code>"
+                    msgg = f"<b>• Peers:</b> <code>{file.connections}</code> <b>Seeds:</b> <code>{file.num_seeders}</code>\n<b>• GID :</b> <code>{gid}</code>"
                     msg = f"\n<b>• File Name :</b> `{downloading_dir_name}`"
-                    msg += f"\n<b>• Speed :</b> `{file.download_speed_string()} | <b>• ETA :</b> <code>{file.eta_string()}</code>"
-                    msg += f"\n<b>• Size :</b> <code>{file.total_length_string()}</code> [<code>{file.progress_string()}</code>]\n{msgg}"
+                    msg += f"\n<b>• Speed :</b> <code>{file.download_speed_string()}</code> ETA :</b> <code>{file.eta_string()}</code>"
+                    msg += f"\n<b>• Size :</b> <code>{file.total_length_string()}</code>  [<code>{file.progress_string()}</code>]\n{msgg}"
                 inline_keyboard = []
                 ikeyboard = []
                 ikeyboard.append(
@@ -410,7 +410,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
             )
             await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             await event.edit(
-                f"<b>Leech Successfully</b>:\n\n• <b>File Name</b>: \n`{file.name}`\n\n• <b>Total Size</b>: `〘{file.total_length_string()}〙`"
+                f"<b>Leech Successfully</b>:\n\n• <b>File Name</b>: \n`{file.name}`\n\n• <b>Total Size</b>: `{file.total_length_string()}`"
             )
             return True
     except aria2p.client.ClientException:
