@@ -65,24 +65,62 @@ async def aria_start():
     global sonstringtrckr
     aria2_daemon_start_cmd = []
     # start the daemon, aria2c command
+    # aria2_daemon_start_cmd.append("aria2c")
+    # aria2_daemon_start_cmd.append("--allow-overwrite=true")
+    # aria2_daemon_start_cmd.append("--daemon=true")
+    # # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
+    # # TODO: this does not work, need to investigate this.
+    # # but for now, https://t.me/TrollVoiceBot?start=858
+    # aria2_daemon_start_cmd.append("--enable-rpc")
+    # aria2_daemon_start_cmd.append("--follow-torrent=mem")
+    # aria2_daemon_start_cmd.append("--max-connection-per-server=10")
+    # aria2_daemon_start_cmd.append("--min-split-size=10M")
+    # aria2_daemon_start_cmd.append("--rpc-listen-all=false")
+    # aria2_daemon_start_cmd.append("--rpc-listen-port=6800")
+    # aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
+    # aria2_daemon_start_cmd.append(f"--bt-tracker={sonstringtrckr}")
+    # aria2_daemon_start_cmd.append("--bt-max-peers=0")
+    # aria2_daemon_start_cmd.append("--seed-time=0.01")
+    # aria2_daemon_start_cmd.append("--max-overall-upload-limit=1K")
+    # aria2_daemon_start_cmd.append("--split=10")
+    # aria2_daemon_start_cmd.append(
+    #     f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}"
+    ###### [Modified by Manssizz] ###### 
     aria2_daemon_start_cmd.append("aria2c")
     aria2_daemon_start_cmd.append("--allow-overwrite=true")
     aria2_daemon_start_cmd.append("--daemon=true")
-    # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
-    # TODO: this does not work, need to investigate this.
-    # but for now, https://t.me/TrollVoiceBot?start=858
-    aria2_daemon_start_cmd.append("--enable-rpc")
+    aria2_daemon_start_cmd.append("--check-certificate=false")
+    aria2_daemon_start_cmd.append("--enable-dht")
+    aria2_daemon_start_cmd.append("--dht-listen-port=6881")
+    aria2_daemon_start_cmd.append("--follow-metalink=mem")
+    aria2_daemon_start_cmd.append("--bt-max-peers=0")
+    aria2_daemon_start_cmd.append("--seed-time=0.01")
+    aria2_daemon_start_cmd.append("--min-split-size=10M")
+    aria2_daemon_start_cmd.append("--peer-id-prefix=-qB4341-")
+    aria2_daemon_start_cmd.append("--user-agent=qBittorrent/4.3.4.1")
+    aria2_daemon_start_cmd.append("--disk-cache=64M")
+    aria2_daemon_start_cmd.append("--file-allocation=prealloc")
+    aria2_daemon_start_cmd.append("--continue=true")
+    aria2_daemon_start_cmd.append("--bt-request-peer-speed-limit=2048K")
+    aria2_daemon_start_cmd.append("--auto-file-renaming=true")
+    aria2_daemon_start_cmd.append("--max-tries=20")
+    aria2_daemon_start_cmd.append("--bt-enable-lpd=true")
+    aria2_daemon_start_cmd.append("--seed-ratio=0.0")
+    aria2_daemon_start_cmd.append("--content-disposition-default-utf8=true")
+    aria2_daemon_start_cmd.append("--http-accept-gzip=true")
+    aria2_daemon_start_cmd.append("--reuse-uri=true")
+    aria2_daemon_start_cmd.append("--max-file-not-found=5")
     aria2_daemon_start_cmd.append("--follow-torrent=mem")
     aria2_daemon_start_cmd.append("--max-connection-per-server=10")
     aria2_daemon_start_cmd.append("--min-split-size=10M")
+    aria2_daemon_start_cmd.append("--enable-rpc")
     aria2_daemon_start_cmd.append("--rpc-listen-all=false")
     aria2_daemon_start_cmd.append("--rpc-listen-port=6800")
     aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
-    aria2_daemon_start_cmd.append(f"--bt-tracker={sonstringtrckr}")
-    aria2_daemon_start_cmd.append("--bt-max-peers=0")
-    aria2_daemon_start_cmd.append("--seed-time=0.01")
+    aria2_daemon_start_cmd.append("--seed-time=0")
     aria2_daemon_start_cmd.append("--max-overall-upload-limit=1K")
     aria2_daemon_start_cmd.append("--split=10")
+    aria2_daemon_start_cmd.append(f"--bt-tracker={sonstringtrckr}")
     aria2_daemon_start_cmd.append(
         f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}"
     )
@@ -277,7 +315,7 @@ async def call_apropriate_function(
                     message_id = final_response[key_f_res_se]
                     channel_id = str(sent_message_to_update_tg_p.chat.id)[4:]
                     private_link = f"https://t.me/c/{channel_id}/{message_id}"
-                    message_to_send += "✘ <a href='"
+                    message_to_send += "• <a href='"
                     message_to_send += private_link
                     message_to_send += "'>"
                     message_to_send += local_file_name
@@ -290,7 +328,7 @@ async def call_apropriate_function(
                     message_to_send = mention_req_user + message_to_send
                     message_to_send = message_to_send + "\n\n" + "#uploaded</b>"
                 else:
-                    message_to_send = "<i>FAILED</i> to upload files. 😞😞"
+                    message_to_send = "<i>FAILED</i> to upload files."
                 await user_message.reply_text(
                     text=message_to_send, quote=True, disable_web_page_preview=True
                 )
@@ -324,12 +362,12 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                     pass
                 #
                 if is_file is None:
-                    msgg = f"<b>➩ Connections : {file.connections} </b>"
+                    msgg = f"<b>• Connections : {file.connections} </b>"
                 else:
-                    msgg = f"<b>➩ Info :- P: {file.connections} || S: {file.num_seeders} </b>\n\n<b>🗑️ GID :</b> <code>{gid}</code>"
-                msg = f"\n<b>📘 File Name :</b> `{downloading_dir_name}`\n\n<b>➩ Speed :</b> `{file.download_speed_string()}`"
-                msg += f"\n<b>➩ Size :</b> `{file.total_length_string()}`"
-                msg += f"\n<b>➩ Downloaded</b> : `{file.progress_string()}` \n<b>➩ ETA :</b> `{file.eta_string()}` \n {msgg}"
+                    msgg = f"<b>• Info :- P: {file.connections} || S: {file.num_seeders} </b>\n\n<b>🗑️ GID :</b> <code>{gid}</code>"
+                msg = f"\n<b>• File Name :</b> `{downloading_dir_name}`\n\n<b>➩ Speed :</b> `{file.download_speed_string()}`"
+                msg += f"\n<b>• Size :</b> `{file.total_length_string()}`"
+                msg += f"\n<b>• Downloaded</b> : `{file.progress_string()}` \n<b>➩ ETA :</b> `{file.eta_string()}` \n {msgg}"
                 inline_keyboard = []
                 ikeyboard = []
                 ikeyboard.append(
@@ -369,11 +407,11 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
             await check_progress_for_dl(aria2, gid, event, previous_message)
         else:
             LOGGER.info(
-                f"<b> Leechd Successfully</b>: `{file.name} ({file.total_length_string()})` 🤒"
+                f"<b>Leechd Successfully</b>: `{file.name} ({file.total_length_string()})`"
             )
             await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             await event.edit(
-                f"<b>Leech Successfully</b>:\n\n📙 <b>File Name</b>: \n`{file.name}`\n\n📀 <b>Total Size</b>: `〘{file.total_length_string()}〙`"
+                f"<b>Leech Successfully</b>:\n\n• <b>File Name</b>: \n`{file.name}`\n\n• <b>Total Size</b>: `〘{file.total_length_string()}〙`"
             )
             return True
     except aria2p.client.ClientException:
@@ -391,7 +429,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
         file.remove(force=True, files=True)
         await event.edit(
             "*Download Auto Canceled :**\n\n"
-            "`Your Torrent/Link is Dead.`👺".format(file.name)
+            "`Your Torrent/Link is Dead.`".format(file.name)
         )
         return False
     except Exception as e:
