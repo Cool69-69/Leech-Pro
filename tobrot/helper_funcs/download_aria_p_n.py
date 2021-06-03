@@ -63,7 +63,7 @@ sonstringtrckr = ','.join(trackerlistemiz)
 async def aria_start():
     global sonstringtrckr
     aria2_daemon_start_cmd = []
-    start the daemon, aria2c command
+    # start the daemon, aria2c command
     aria2_daemon_start_cmd.append("aria2c")
     aria2_daemon_start_cmd.append("--allow-overwrite=true")
     aria2_daemon_start_cmd.append("--daemon=true")
@@ -121,7 +121,7 @@ async def aria_start():
     # aria2_daemon_start_cmd.append(f"--bt-tracker={sonstringtrckr}")
     # aria2_daemon_start_cmd.append(
     #     f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}"
-    )
+    # )
     #
     LOGGER.info(aria2_daemon_start_cmd)
     #
