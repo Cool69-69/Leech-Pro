@@ -162,7 +162,7 @@ def add_torrent(aria_instance, torrent_file_path):
             False,
             "**FAILED** \n"
             + str(e)
-            + " \nsomething wrongings when trying to add <u>TORRENT</u> file",
+            + "Failed getting data <u>TORRENT</u>",
         )
     if os.path.exists(torrent_file_path):
         # Add Torrent Into Queue
@@ -175,7 +175,7 @@ def add_torrent(aria_instance, torrent_file_path):
                 False,
                 "**FAILED** \n"
                 + str(e)
-                + " \n<b> Your Link is Dead</b>",
+                + "<b>Your Link is Dead</b>",
             )
         else:
             return True, "" + download.gid + ""
@@ -211,7 +211,7 @@ def add_url(aria_instance, text_url, c_file_name):
     except Exception as e:
         return (
             False,
-            "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help",
+            "**FAILED** \n" + str(e) + "Please do not send SLOW links. Read /help",
         )
     else:
         return True, "" + download.gid + ""
@@ -365,7 +365,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 else:
                     msgg = f"<b>• Peers:</b> <code>{file.connections}</code> <b>Seeds:</b> <code>{file.num_seeders}</code>\n<b>• GID :</b> <code>{gid}</code>"
                     msg = f"\n<b>• File Name :</b> `{downloading_dir_name}`"
-                    msg += f"\n<b>• Speed :</b> <code>{file.download_speed_string()}</code> ETA :</b> <code>{file.eta_string()}</code>"
+                    msg += f"\n<b>• Speed :</b> <code>{file.download_speed_string()}</code> <b>ETA :</b> <code>{file.eta_string()}</code>"
                     msg += f"\n<b>• Size :</b> <code>{file.total_length_string()}</code>  [<code>{file.progress_string()}</code>]\n{msgg}"
                 inline_keyboard = []
                 ikeyboard = []
@@ -406,7 +406,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
             await check_progress_for_dl(aria2, gid, event, previous_message)
         else:
             LOGGER.info(
-                f"<b>Leechd Successfully</b>: `{file.name} ({file.total_length_string()})`"
+                f"<b>Leech Successfully</b>: `{file.name} ({file.total_length_string()})`"
             )
             await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             await event.edit(
