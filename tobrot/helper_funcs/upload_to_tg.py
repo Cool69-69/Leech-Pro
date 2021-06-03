@@ -71,7 +71,8 @@ async def upload_to_tg(
         new_m_esg = message
         if not message.photo:
             new_m_esg = await message.reply_text(
-                f"Found {len(directory_contents)} files <a href='tg://user?id={from_user}'>🤒</a>",
+                # f"Found {len(directory_contents)} files <a href='tg://user?id={from_user}'>🤒</a>",
+                f"<code>{len(directory_contents)}</code> files in <code>{local_file_name}</code>",
                 quote=True
                 # reply_to_message_id=message.message_id
             )
@@ -318,7 +319,7 @@ async def upload_single_file(
         message_for_progress_display = message
         if not edit_media:
             message_for_progress_display = await message.reply_text(
-                "<b>Trying to upload</b>\n\n•<b> File Name</b>: <code>{}</code>".format(os.path.basename(local_file_name))
+                "<b>Trying to upload</b>\n•<b> File Name</b>: <code>{}</code>".format(os.path.basename(local_file_name))
             )
             prog = Progress(from_user, client, message_for_progress_display)
         sent_message = await message.reply_document(
@@ -348,7 +349,7 @@ async def upload_single_file(
             message_for_progress_display = message
             if not edit_media:
                 message_for_progress_display = await message.reply_text(
-                    "<b>Trying to upload</b>\n\n•<b> File Name</b>: <code>{}</code>".format(os.path.basename(local_file_name))
+                    "<b>Trying to upload</b>\n•<b> File Name</b>: <code>{}</code>".format(os.path.basename(local_file_name))
                 )
                 prog = Progress(from_user, client, message_for_progress_display)
             if local_file_name.upper().endswith(("MKV", "MP4", "WEBM")):
