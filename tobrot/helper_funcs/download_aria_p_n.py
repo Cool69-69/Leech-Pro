@@ -67,6 +67,7 @@ async def aria_start():
     aria2_daemon_start_cmd.append("aria2c")
     aria2_daemon_start_cmd.append("--allow-overwrite=true")
     aria2_daemon_start_cmd.append("--daemon=true")
+    aria2_daemon_start_cmd.append("--check-certificate=false")
     # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
     # TODO: this does not work, need to investigate this.
     # but for now, https://t.me/TrollVoiceBot?start=858
@@ -121,7 +122,7 @@ async def aria_start():
     # aria2_daemon_start_cmd.append(f"--bt-tracker={sonstringtrckr}")
     # aria2_daemon_start_cmd.append(
     #     f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}"
-    # )
+    )
     #
     LOGGER.info(aria2_daemon_start_cmd)
     #
